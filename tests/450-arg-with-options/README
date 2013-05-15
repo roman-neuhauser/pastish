@@ -1,0 +1,5 @@
+pastish should abort when mixing upload options with arguments
+
+- exit code should be 1
+- stdout should be empty
+- stderr should have a short complaint

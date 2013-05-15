@@ -1,0 +1,114 @@
+#!/bin/sh
+
+# vim: fdm=marker cms=\ #\ %s
+
+set -o errexit
+set -o nounset
+set -o posix
+
+pastish_server=http://pastebin.suse.de/
+pastish_user=
+
+for f in /etc/pastish ~/.pastish; do
+  test -f "$f" && test -r "$f" && {
+    . $f
+  }
+done
+
+SELF=$(basename "$0")
+
+usage() # {{{
+{
+  local self="$SELF" exit=${1?} fd=1
+  shift
+  test $exit -ne 0 && fd=2
+  {
+    if test $exit -eq 1; then
+      printf "%s: option -%c requires an argument\n" "$self" "$1"
+    elif test $exit -eq 2; then
+      printf "%s: unknown option -%c\n" "$self" "$1"
+    elif test $exit -eq 3; then
+      printf "%s: multiple arguments are not supported\n" "$self"
+    elif test $exit -eq 4; then
+      printf "%s: bad argument\n" "$self"
+    elif test $exit -eq 5; then
+      printf "%s: mixing -%c with ID is not supported\n" "$self" "$1"
+    fi
+    printf "%s: Usage: %s {-h|[options]|ID}\n" "$self" "$self"
+    if test $exit -ne 0; then
+      printf "%s: Use \"%s -h\" to see the full option listing.\n" "$self" "$self"
+    else
+      printf "  Options:\n"
+      printf "    %-16s  %s\n" \
+        "-h"              "Display this message" \
+        "-d DESCRIPTION"  "Submit the snippet with DESCRIPTION" \
+        "-s SYNTAX"       "Use SYNTAX for highlighting" \
+        "-u USERNAME"     "The author of the snippet is USERNAME"
+      printf "  Arguments:\n"
+      printf "    %-16s  %s\n" \
+        "ID"							"Display snippet with ID"
+    fi
+  } >&$fd
+  if test $exit -eq 0; then
+    exit 0
+  else
+    exit 1
+  fi
+} # }}}
+
+is_number() # {{{
+{
+  test ${#1} -eq "$(expr "$1" : '[[:digit:]][[:digit:]]*')" || return 1
+} # }}}
+
+do_submit() # {{{
+{
+  trap 'rm -f $tmpfile' EXIT
+  tmpfile=$(mktemp)
+  tee "$tmpfile" >/dev/null
+  : ${user="$pastish_user"}
+  curl \
+    -w '%{redirect_url}\n' \
+    --url "${pastish_server}add" \
+    -F "code=<$tmpfile" \
+    -F formsubmit=paste \
+    ${user:+-F login="$user"} \
+    ${hili:+-F highlight="$hili"} \
+    ${desc:+-F desc="$desc"}
+} # }}}
+
+do_fetch() # {{{
+{
+  curl -G "$pastish_server$1/src"
+} # }}}
+
+while getopts :d:hs:u: optname; do
+  case $optname in
+  d) desc="$OPTARG" ;;
+  h) usage 0 ;;
+  s) hili="$OPTARG" ;;
+  u) user="$OPTARG" ;;
+  :) usage 1 "$OPTARG" ;; # option-argument missing
+  ?) usage 2 "$OPTARG" ;; # unknown option
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+if test $# -gt 1; then
+  usage 3
+elif test $# -eq 1; then
+  is_number "$1" || usage 4
+  test .unset = ".${desc-unset}" || usage 5 d
+  test .unset = ".${hili-unset}" || usage 5 s
+  test .unset = ".${user-unset}" || usage 5 u
+  req=fetch
+elif test $# -eq 0; then
+  req=submit
+fi
+
+case $req in
+submit) do_submit ;;
+fetch)  do_fetch "$1" ;;
+esac
+

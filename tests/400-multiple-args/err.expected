@@ -1,0 +1,3 @@
+pastish: multiple arguments are not supported
+pastish: Usage: pastish {-h|[options]|ID}
+pastish: Use "pastish -h" to see the full option listing.

@@ -1,0 +1,5 @@
+`pastish -h` outputs usage instructions
+
+- exit code should be 0
+- stdout has usage instructions
+- stderr is empty

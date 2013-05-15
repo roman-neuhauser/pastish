@@ -1,0 +1,7 @@
+pastish should download and display snippet with ID
+
+- exit code should be 0
+- stdout should have the corresponding data
+- stderr should be empty
+
+note that this does not test actual curl(1) or server-side behavior.

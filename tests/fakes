@@ -1,0 +1,19 @@
+fake()
+{
+  [ "${BSU_QUIET_FAKE:-'0'}" = '1' ] && return
+  [ $# -eq 0 ] && return
+  local i=0
+  for a in "$@"; do
+    if [ $i -eq 0 ]; then sp=''; else sp=' '; fi
+    (( i += 1 ))
+    case "$a" in
+    ("" | *\ *) printf -- '%s"%s"' "$sp" "$a" ;;
+    (*)         printf -- '%s%s'   "$sp" "$a" ;;
+    esac
+  done
+  printf '\n'
+} >&3
+
+curl()    { fake curl    ${1+"$@"}; echo "output from curl(1)"; }
+mktemp()  { fake mktemp  ${1+"$@"}; echo '/tmp/fake-path'; }
+

@@ -1,0 +1,3 @@
+pastish: mixing -s with ID is not supported
+pastish: Usage: pastish {-h|[options]|ID}
+pastish: Use "pastish -h" to see the full option listing.

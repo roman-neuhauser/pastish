@@ -1,0 +1,32 @@
+# norootforbuild
+
+Name:           pastish
+Version:        __VERSION__
+Release:        0
+License:        MIT
+Summary:        Tiny client for the SUSE pastebin service.
+Url:            https://github.com/roman-neuhauser/%{name}
+Group:          Development/Tools
+Source:         %{name}-%{version}.tar.gz
+BuildRequires:  filesystem
+BuildArch:      noarch
+BuildRoot:      %_tmppath/%name-%version-build
+Requires:       curl
+
+%description
+pastish is a simple client for the SUSE pastebin service.
+
+%prep
+%setup -q
+
+%build
+
+%install
+make install DESTDIR=%{buildroot} PREFIX=/usr
+
+%files
+%defattr(-,root,root)
+%{_bindir}/pastish
+%{_mandir}/man1/pastish.1.gz
+
+%changelog

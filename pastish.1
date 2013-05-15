@@ -1,0 +1,138 @@
+.\" This document is in the public domain.
+.\" vim: fdm=marker
+.
+.\" FRONT MATTER {{{
+.Dd Jul 16, 2012
+.Os
+.Dt PASTISH 1
+.
+.Sh NAME
+.Nm pastish
+.Nd Tiny client for the SUSE pastebin service.
+.\" FRONT MATTER }}}
+.
+.\" SYNOPSIS {{{
+.Sh SYNOPSIS
+.Nm
+.Fl h
+.Nm
+.Op Fl d Ar DESCRIPTION
+.Op Fl s Ar SYNTAX
+.Op Fl u Ar USERNAME
+.Nm
+.Ar ID
+.\" SYNOPSIS }}}
+.
+.\" DESCRIPTION {{{
+.Sh DESCRIPTION
+.Nm
+is a simple client for the SUSE pastebin service.
+.Pp
+Given a single numeric argument,
+.Nm
+will fetch the corresponding snippet, and display it
+on standard output.
+.Pp
+Given no arguments, and possibly any of the
+.Fl d , s , u
+options,
+.Nm
+will upload the contents of standard input,
+and display the resulting URL.
+.
+.Pp
+.
+.Bl -tag -width "xx"
+.It Fl h
+Display a usage description.
+.
+.It Fl d Ar DESCRIPTION
+Submit the snippet with
+.Ar DESCRIPTION .
+.
+.It Fl s Ar SYNTAX
+Use
+.Ar SYNTAX
+for highlighting.
+.
+.It Fl u Ar USERNAME
+The author of the snippet is
+.Ar USERNAME .
+.
+.It Ar ID
+Fetch snippet with
+.Ar ID .
+.El
+.
+.\" DESCRIPTION }}}
+.\" .Sh IMPLEMENTATION NOTES
+.\" ENVIRONMENT {{{
+.Sh ENVIRONMENT
+.Nm
+itself does not use any environment variables.
+It is, however, implemented in terms of third-party commands
+which
+.Em do
+use them.
+This means
+.Nm
+may be influenced by environment variables used by
+.Xr sh 1 ,
+.Xr curl 1  ,
+possibly others.
+.\" ENVIRONMENT }}}
+.\" FILES {{{
+.Sh FILES
+.Nm
+reads
+.Pa /etc/pastish
+and
+.Pa ~/.pastish .
+.\" FILES }}}
+.\" EXAMPLES {{{
+.Sh EXAMPLES
+.Ss Submit
+.Bd -literal
+% pastish -s python < ./a-file.py
+http://pastebin.suse.de/7890
+.Ed
+.Ss Display
+.Bd -literal
+% pastish 7890
+if __name__ == '__main__'
+  print("Hello world!")
+.Ed
+.\" EXAMPLES }}}
+.\" DIAGNOSTICS {{{
+.Sh DIAGNOSTICS
+.Nm
+exits with
+.Li 0
+on success, and with
+.Li >0
+otherwise.
+.\" DIAGNOSTICS }}}
+.\" .Sh COMPATIBILITY
+.\" SEE ALSO {{{
+.Sh SEE ALSO
+SUSE pastebin server
+.Aq https://pastebin.suse.de/ .
+.\" SEE ALSO }}}
+.\" .Sh STANDARDS
+.\" .Sh HISTORY
+.\" AUTHORS {{{
+.Sh AUTHORS
+.
+.Nm
+and this manual page are written by
+.Aq rneuhauser@suse.cz .
+.Pp
+See
+.Aq https://github.com/roman-neuhauser/pastish/ .
+.\" AUTHORS }}}
+.\" BUGS {{{
+.Sh BUGS
+No doubt plentiful.
+Please report them at
+.Aq https://github.com/roman-neuhauser/pastish/issues .
+.\" BUGS }}}

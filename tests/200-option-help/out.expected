@@ -1,0 +1,8 @@
+pastish: Usage: pastish {-h|[options]|ID}
+  Options:
+    -h                Display this message
+    -d DESCRIPTION    Submit the snippet with DESCRIPTION
+    -s SYNTAX         Use SYNTAX for highlighting
+    -u USERNAME       The author of the snippet is USERNAME
+  Arguments:
+    ID                Display snippet with ID
