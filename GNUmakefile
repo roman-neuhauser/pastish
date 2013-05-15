@@ -10,7 +10,7 @@ INSTALL_DATA?=	install -m 644
 INSTALL_SCRIPT?=	install -m 755
 RST2HTML?=$(call first_in_path,rst2html.py rst2html)
 
-artifacts =	pastish.1.gz pastish
+artifacts =	README.html pastish.1.gz pastish
 
 wc:
 	git submodule init
@@ -26,6 +26,8 @@ check: all
 
 pastish: pastish.in
 	$(INSTALL_SCRIPT) $< $@
+
+html: README.html
 
 %.html: %.rest
 	$(RST2HTML) $< $@
@@ -50,5 +52,6 @@ endef
 .PHONY: all
 .PHONY: check
 .PHONY: clean
+.PHONY: html
 .PHONY: install
 .PHONY: wc

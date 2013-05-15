@@ -1,0 +1,82 @@
+.. vim: ft=rst sts=2 sw=2 tw=82
+.. default-role:: strong
+
+.. This file is marked up using reStructuredText.
+   Lines beginning with ".." are reST directives.
+   "foo_" or "`foo bar`_" is a link, defined at ".. _foo" or
+   ".. _foo bar".
+   "::" introduces a literal block (usually some form of code).
+   "`foo`" is some kind of identifier.
+   Suspicious backslashes in the text ("`std::string`\s") are required
+   for reST to recognize the preceding character as syntax.
+
+.. parsed-literal::
+
+  `NAME`
+       `pastish` — Tiny client for the SUSE pastebin service.
+
+  `SYNOPSIS`
+
+       pastish -h
+       pastish [-d `DESCRIPTION`] [-s `SYNTAX`] [-u `USERNAME`]
+       pastish `ID`
+
+  `DESCRIPTION`
+
+       `pastish` is a simple client for the SUSE pastebin service.
+
+       Given a single numeric argument, `pastish` will fetch the corresponding
+       snippet, and display it on standard output.
+
+       Given no arguments, and possibly any of the `-d`, `-s`, `-u` options, `pastish`
+       will upload the contents of standard input, and display the resulting
+       URL.
+
+       -h   Display a usage description.
+
+       -d   `DESCRIPTION`
+            Submit the snippet with `DESCRIPTION`.
+
+       -s   `SYNTAX`
+            Use `SYNTAX` for highlighting.
+
+       -u   `USERNAME`
+            The author of the snippet is `USERNAME`.
+
+       `ID` Fetch snippet with `ID`.
+
+  `ENVIRONMENT`
+       `pastish` itself does not use any environment variables.  It is, however,
+       implemented in terms of third-party commands which do use them.  This
+       means `pastish` may be influenced by environment variables used by sh(1),
+       curl(1), possibly others.
+
+  FILES
+       `pastish` reads */etc/pastish* and *~/.pastish*.
+
+  EXAMPLES
+     Submit
+       % pastish -s python < ./a-file.py
+       http://pastebin.suse.de/7890
+
+     Display
+       % pastish 7890
+       if __name__ == '__main__'
+         print("Hello world!")
+
+  DIAGNOSTICS
+       `pastish` exits with 0 on success, and with >0 otherwise.
+
+  SEE ALSO
+       SUSE pastebin server ⟨https://pastebin.suse.de/⟩.
+
+  AUTHORS
+       `pastish` and this manual page are written by ⟨rneuhauser@suse.cz⟩.
+
+       See ⟨https://github.com/roman-neuhauser/pastish/⟩.
+
+  BUGS
+       No doubt plentiful.  Please report them at
+       ⟨https://github.com/roman-neuhauser/pastish/issues⟩.
+
+
