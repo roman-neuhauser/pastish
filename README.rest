@@ -51,31 +51,31 @@
        means `pastish` may be influenced by environment variables used by sh(1),
        curl(1), possibly others.
 
-  FILES
+  `FILES`
        `pastish` reads */etc/pastish* and *~/.pastish*.
 
-  EXAMPLES
-     Submit
+  `EXAMPLES`
+     `Submit`
        % pastish -s python < ./a-file.py
        http://pastebin.suse.de/7890
 
-     Display
+     `Display`
        % pastish 7890
        if __name__ == '__main__'
          print("Hello world!")
 
-  DIAGNOSTICS
+  `DIAGNOSTICS`
        `pastish` exits with 0 on success, and with >0 otherwise.
 
-  SEE ALSO
+  `SEE ALSO`
        SUSE pastebin server ⟨https://pastebin.suse.de/⟩.
 
-  AUTHORS
+  `AUTHORS`
        `pastish` and this manual page are written by ⟨rneuhauser@suse.cz⟩.
 
        See ⟨https://github.com/roman-neuhauser/pastish/⟩.
 
-  BUGS
+  `BUGS`
        No doubt plentiful.  Please report them at
        ⟨https://github.com/roman-neuhauser/pastish/issues⟩.
 
