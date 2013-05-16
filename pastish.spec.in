@@ -6,7 +6,7 @@ Release:        0
 License:        MIT
 Summary:        Tiny client for the SUSE pastebin service
 Url:            https://github.com/roman-neuhauser/%{name}
-Group:          Development/Tools
+Group:          Productivity/Networking/Web/Frontends
 Source:         %{name}-%{version}.tar.gz
 BuildRequires:  filesystem
 BuildArch:      noarch
