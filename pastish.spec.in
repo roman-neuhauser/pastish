@@ -4,7 +4,7 @@ Name:           pastish
 Version:        __VERSION__
 Release:        0
 License:        MIT
-Summary:        Tiny client for the SUSE pastebin service.
+Summary:        Tiny client for the SUSE pastebin service
 Url:            https://github.com/roman-neuhauser/%{name}
 Group:          Development/Tools
 Source:         %{name}-%{version}.tar.gz
