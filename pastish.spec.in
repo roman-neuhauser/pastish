@@ -13,6 +13,7 @@ BuildArch:      noarch
 BuildRoot:      %_tmppath/%name-%version-build
 Requires:       curl
 
+%define pastish_make  make PREFIX=%{_prefix}
 %description
 pastish is a simple client for the SUSE pastebin service.
 
@@ -20,9 +21,10 @@ pastish is a simple client for the SUSE pastebin service.
 %setup -q
 
 %build
+pastish_make most
 
 %install
-make install DESTDIR=%{buildroot} PREFIX=/usr
+pastish_make install DESTDIR=%{buildroot}
 
 %files
 %defattr(-,root,root)
