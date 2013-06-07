@@ -10,7 +10,8 @@ INSTALL_DATA?=	install -m 644
 INSTALL_SCRIPT?=	install -m 755
 RST2HTML?=$(call first_in_path,rst2html.py rst2html)
 
-artifacts =	README.html pastish.1.gz pastish
+installed =	pastish.1.gz pastish
+artifacts =	$(installed) README.html
 
 wc:
 	git submodule init
@@ -18,10 +19,12 @@ wc:
 
 all: $(artifacts)
 
+most: $(installed)
+
 clean:
 	$(RM) $(artifacts)
 
-check: all
+check: pastish
 	SHELL=$(SHELL) $(SHELL) rnt/run-tests.sh tests $$PWD/pastish
 
 pastish: pastish.in
@@ -35,10 +38,10 @@ html: README.html
 %.1.gz: %.1
 	$(GZIPCMD) < $< > $@
 
-install: pastish.1.gz
+install: $(installed)
 	@mkdir -p $(DESTDIR)$(BINDIR)
 	@mkdir -p $(DESTDIR)$(MAN1DIR)
-	@$(INSTALL_SCRIPT) pastish.in $(DESTDIR)$(BINDIR)/pastish
+	@$(INSTALL_SCRIPT) pastish $(DESTDIR)$(BINDIR)/pastish
 	@$(INSTALL_DATA) pastish.1.gz $(DESTDIR)$(MAN1DIR)/pastish.1.gz
 
 define first_in_path
@@ -47,11 +50,12 @@ define first_in_path
   ))
 endef
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := most
 
 .PHONY: all
 .PHONY: check
 .PHONY: clean
 .PHONY: html
 .PHONY: install
+.PHONY: most
 .PHONY: wc
