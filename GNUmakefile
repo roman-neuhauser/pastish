@@ -46,9 +46,12 @@ install: $(installed)
 	@$(INSTALL_DATA) pastish.1.gz $(DESTDIR)$(MAN1DIR)/pastish.1.gz
 
 define first_in_path
-  $(firstword $(wildcard \
-    $(foreach p,$(1),$(addsuffix /$(p),$(subst :, ,$(PATH)))) \
-  ))
+  $(or \
+    $(firstword $(wildcard \
+      $(foreach p,$(1),$(addsuffix /$(p),$(subst :, ,$(PATH)))) \
+    )) \
+  , $(error Need one of: $(1)) \
+  )
 endef
 
 .DEFAULT_GOAL := most
