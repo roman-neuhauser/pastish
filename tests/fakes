@@ -5,7 +5,7 @@ fake()
   local i=0
   for a in "$@"; do
     if [ $i -eq 0 ]; then sp=''; else sp=' '; fi
-    (( i += 1 ))
+    : $(( i += 1 ))
     case "$a" in
     ("" | *\ *) printf -- '%s"%s"' "$sp" "$a" ;;
     (*)         printf -- '%s%s'   "$sp" "$a" ;;
