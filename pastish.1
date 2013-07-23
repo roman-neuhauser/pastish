@@ -84,10 +84,24 @@ possibly others.
 .\" FILES {{{
 .Sh FILES
 .Nm
-reads
+reads, in order,
 .Pa /etc/pastish
 and
 .Pa ~/.pastish .
+These files, if present, are expected to be
+.Xr sh 1 Ns - Ns compatible
+scripts;
+they may define any of the following variables:
+.
+.Bl -tag -width "xx"
+.It pastish_server
+URL-base for the pastebin server.
+Defaults to
+.Li http://pastebin.suse.de/ .
+.It pastish_user
+Any string identifying the submitter.
+Defaults to the empty string.
+.El
 .\" FILES }}}
 .\" EXAMPLES {{{
 .Sh EXAMPLES
