@@ -68,6 +68,7 @@ do_submit() # {{{
   tee "$tmpfile" >/dev/null
   : ${user="$pastish_user"}
   curl \
+    -Ss \
     -w '%{redirect_url}\n' \
     --url "${pastish_server}add" \
     -F "code=<$tmpfile" \
