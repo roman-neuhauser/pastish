@@ -58,7 +58,7 @@ usage() # {{{
 
 is_number() # {{{
 {
-  test ${#1} -eq "$(expr "$1" : '[[:digit:]][[:digit:]]*')" || return 1
+  test ${#1} -eq "$(expr "$1" : '[[:digit:]][[:digit:]]*')"
 } # }}}
 
 do_submit() # {{{
