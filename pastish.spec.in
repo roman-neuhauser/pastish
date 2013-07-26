@@ -21,10 +21,10 @@ pastish is a simple client for the SUSE pastebin service.
 %setup -q
 
 %build
-pastish_make most
+%pastish_make most
 
 %install
-pastish_make install DESTDIR=%{buildroot}
+%pastish_make install DESTDIR=%{buildroot}
 
 %files
 %defattr(-,root,root)
