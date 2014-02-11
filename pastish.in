@@ -7,7 +7,7 @@ set -o nounset
 (set -o posix 2>/dev/null) && set -o posix
 
 pastish_server=http://pastebin.suse.de/
-pastish_user=
+pastish_user="$USER@$(hostname -f)"
 
 for f in /etc/pastish ~/.pastish; do
   test -f "$f" && test -r "$f" && {
