@@ -16,21 +16,19 @@
        `pastish` — Tiny client for the SUSE pastebin service.
 
   `SYNOPSIS`
-
        pastish -h
        pastish [-d `DESCRIPTION`] [-s `SYNTAX`] [-u `USERNAME`]
        pastish `ID`
 
   `DESCRIPTION`
-
        `pastish` is a simple client for the SUSE pastebin service.
 
        Given a single numeric argument, `pastish` will fetch the corresponding
        snippet, and display it on standard output.
 
-       Given no arguments, and possibly any of the `-d`, `-s`, `-u` options, `pastish`
-       will upload the contents of standard input, and display the resulting
-       URL.
+       Given no arguments, and possibly any of the `-d`, `-s`, `-u` options,
+       `pastish` will upload the contents of standard input, and display
+       the resulting URL.
 
        -h   Display a usage description.
 
@@ -52,7 +50,17 @@
        curl(1), possibly others.
 
   `FILES`
-       `pastish` reads */etc/pastish* and *~/.pastish*.
+       `pastish` reads, in order, */etc/pastish* and *~/.pastish*.  These files,
+       if present, are expected to be sh(1)-compatible scripts; they may define
+       any of the following variables:
+
+       pastish_server
+           URL-base for the pastebin server.
+           Defaults to `http://pastebin.suse.de/`.
+
+       pastish_user
+           Any string identifying the submitter.
+           Defaults to `$USER@$(hostname -f)`.
 
   `EXAMPLES`
      `Submit`
