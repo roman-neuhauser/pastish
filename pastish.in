@@ -66,22 +66,53 @@ do_submit() # {{{
   trap 'rm -f $tmpfile' EXIT
   tmpfile=$(mktemp)
   tee "$tmpfile" >/dev/null
+
   : ${user="$pastish_user"}
+  case "$pastish_server" in
+  *pastebin.suse.de*)
+    set -- \
+      --url "${pastish_server}add" \
+      -F "code=<$tmpfile" \
+      -F formsubmit=paste \
+      ${hili:+-F highlight="$hili"} \
+      ${user:+-F login="$user"} \
+      ${desc:+-F desc="$desc"}
+  ;;
+  *susepaste.org*)
+    set -- \
+      --url "${pastish_server}" \
+      -F "code=<$tmpfile" \
+      -F submit=submit \
+      -F private=1 \
+      -F expire=$((24 * 60)) \
+      -F lang="${hili:-text}" \
+      ${user:+-F name="$user"} \
+      ${desc:+-F title="$desc"}
+  ;;
+  esac
   curl \
     -fSs \
     -w '%{redirect_url}\n' \
-    --url "${pastish_server}add" \
-    -F "code=<$tmpfile" \
-    -F formsubmit=paste \
-    ${user:+-F login="$user"} \
-    ${hili:+-F highlight="$hili"} \
-    ${desc:+-F desc="$desc"}
+    "$@"
 } # }}}
 
 do_fetch() # {{{
 {
-  curl -G "$pastish_server$1/src"
+  case "$pastish_server" in
+  *pastebin.suse.de*)
+    curl -G "$pastish_server$1/src"
+  ;;
+  *susepaste.org*)
+    curl -G "${pastish_server}view/raw/$1"
+  ;;
+  esac
 } # }}}
+
+case "$pastish_server" in
+*pastebin.suse.de*) ;;
+*susepaste.org*) ;;
+*) echo "FUBAR! $pastish_server" >&2; exit; ;;
+esac
 
 while getopts :d:hs:u: optname; do
   case $optname in
