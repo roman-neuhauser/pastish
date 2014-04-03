@@ -21,9 +21,9 @@
        pastish `ID`
 
   `DESCRIPTION`
-       `pastish` is a simple client for the SUSE pastebin service.
+       `pastish` is a simple client for pastebin.suse.de and susepaste.org.
 
-       Given a single numeric argument, `pastish` will fetch the corresponding
+       Given a single snippet id, `pastish` will fetch the corresponding
        snippet, and display it on standard output.
 
        Given no arguments, and possibly any of the `-d`, `-s`, `-u` options,
@@ -43,6 +43,8 @@
 
        `ID` Fetch snippet with `ID`.
 
+       `http://susepaste.org/` snippets are private and expire in 24 hours.
+
   `ENVIRONMENT`
        `pastish` itself does not use any environment variables.  It is, however,
        implemented in terms of third-party commands which do use them.  This
@@ -55,7 +57,7 @@
        any of the following variables:
 
        pastish_server
-           URL-base for the pastebin server.
+           Either `http://pastebin.suse.de/` or `http://susepaste.org/`.
            Defaults to `http://pastebin.suse.de/`.
 
        pastish_user

@@ -26,9 +26,9 @@
 .\" DESCRIPTION {{{
 .Sh DESCRIPTION
 .Nm
-is a simple client for the SUSE pastebin service.
+is a simple client for pastebin.suse.de and susepaste.org.
 .Pp
-Given a single numeric argument,
+Given a single snippet id,
 .Nm
 will fetch the corresponding snippet, and display it
 on standard output.
@@ -64,6 +64,11 @@ Fetch snippet with
 .Ar ID .
 .El
 .
+.Pp
+.
+.Li http://susepaste.org/
+snippets are private and expire in 24 hours.
+.
 .\" DESCRIPTION }}}
 .\" .Sh IMPLEMENTATION NOTES
 .\" ENVIRONMENT {{{
@@ -95,7 +100,10 @@ they may define any of the following variables:
 .
 .Bl -tag -width "xx"
 .It pastish_server
-URL-base for the pastebin server.
+Either
+.Li http://pastebin.suse.de/
+or
+.Li http://susepaste.org/ .
 Defaults to
 .Li http://pastebin.suse.de/ .
 .It pastish_user
