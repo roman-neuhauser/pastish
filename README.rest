@@ -17,7 +17,7 @@
 
   `SYNOPSIS`
        pastish -h
-       pastish [-d `DESCRIPTION`] [-s `SYNTAX`] [-u `USERNAME`]
+       pastish [-A `API`] [-d `DESCRIPTION`] [-s `SYNTAX`] [-u `USERNAME`]
        pastish `ID`
 
   `DESCRIPTION`
@@ -26,11 +26,14 @@
        Given a single snippet id, `pastish` will fetch the corresponding
        snippet, and display it on standard output.
 
-       Given no arguments, and possibly any of the `-d`, `-s`, `-u` options,
-       `pastish` will upload the contents of standard input, and display
-       the resulting URL.
+       Given no arguments, and possibly any of the `-A`, `-d`, `-s`, `-u`
+       options, `pastish` will upload the contents of standard input, and
+       display the resulting URL.
 
        -h   Display a usage description.
+
+       -A   `API`
+            Server uses `API` (either "int" or "ext").
 
        -d   `DESCRIPTION`
             Submit the snippet with `DESCRIPTION`.
@@ -56,9 +59,18 @@
        if present, are expected to be sh(1)-compatible scripts; they may define
        any of the following variables:
 
+       pastish_api
+           Either `int` or `ext`.  Defaults to `int`.
+
        pastish_server
-           Either `http://pastebin.suse.de/` or `http://susepaste.org/`.
+           Defaults to `$pastish_server_int` when `$pastish_api` is `int`, and
+           `$pastish_server_ext` when `$pastish_api` is `ext`.
+
+       pastish_server_int
            Defaults to `http://pastebin.suse.de/`.
+
+       pastish_server_ext
+           Defaults to `http://susepaste.org/`.
 
        pastish_user
            Any string identifying the submitter.
@@ -79,6 +91,7 @@
 
   `SEE ALSO`
        SUSE pastebin server ⟨https://pastebin.suse.de/⟩.
+       openSUSE Paste ⟨http://susepaste.org/⟩.
 
   `AUTHORS`
        `pastish` and this manual page are written by ⟨rneuhauser@suse.cz⟩.

@@ -6,7 +6,9 @@ set -o errexit
 set -o nounset
 (set -o posix 2>/dev/null) && set -o posix
 
-pastish_server=http://pastebin.suse.de/
+pastish_api=int
+pastish_server_int=http://pastebin.suse.de/
+pastish_server_ext=http://susepaste.org/
 pastish_user="$USER@$(hostname -f)"
 
 for f in /etc/pastish ~/.pastish; do
@@ -33,6 +35,14 @@ usage() # {{{
       printf "%s: bad argument\n" "$self"
     elif test $exit -eq 5; then
       printf "%s: mixing -%c with ID is not supported\n" "$self" "$1"
+    elif test $exit -eq 6; then
+      printf "%s: garbled configuration\n" "$self"
+      local val
+      for v in pastish_api pastish_server; do
+        val="${!v}"
+        printf "%s:   %-16s = %s\n" "$self" "$v" "${val:-<empty>}"
+      done
+      exit 1
     fi
     printf "%s: Usage: %s {-h|[options]|ID}\n" "$self" "$self"
     if test $exit -ne 0; then
@@ -41,6 +51,7 @@ usage() # {{{
       printf "  Options:\n"
       printf "    %-16s  %s\n" \
         "-h"              "Display this message" \
+        "-A API"          "Server uses API ('int' or 'ext')" \
         "-d DESCRIPTION"  "Submit the snippet with DESCRIPTION" \
         "-s SYNTAX"       "Use SYNTAX for highlighting" \
         "-u USERNAME"     "The author of the snippet is USERNAME"
@@ -68,8 +79,8 @@ do_submit() # {{{
   tee "$tmpfile" >/dev/null
 
   : ${user="$pastish_user"}
-  case "$pastish_server" in
-  *pastebin.suse.de*)
+  case "$pastish_api" in
+  int)
     set -- \
       --url "${pastish_server}add" \
       -F "code=<$tmpfile" \
@@ -78,7 +89,7 @@ do_submit() # {{{
       ${user:+-F login="$user"} \
       ${desc:+-F desc="$desc"}
   ;;
-  *susepaste.org*)
+  ext)
     set -- \
       --url "${pastish_server}" \
       -F "code=<$tmpfile" \
@@ -98,24 +109,19 @@ do_submit() # {{{
 
 do_fetch() # {{{
 {
-  case "$pastish_server" in
-  *pastebin.suse.de*)
+  case "$pastish_api" in
+  int)
     curl -G "$pastish_server$1/src"
   ;;
-  *susepaste.org*)
+  ext)
     curl -G "${pastish_server}view/raw/$1"
   ;;
   esac
 } # }}}
 
-case "$pastish_server" in
-*pastebin.suse.de*) ;;
-*susepaste.org*) ;;
-*) echo "FUBAR! $pastish_server" >&2; exit; ;;
-esac
-
-while getopts :d:hs:u: optname; do
+while getopts :A:d:hs:u: optname; do
   case $optname in
+  A) api="$OPTARG" ;;
   d) desc="$OPTARG" ;;
   h) usage 0 ;;
   s) hili="$OPTARG" ;;
@@ -126,6 +132,16 @@ while getopts :d:hs:u: optname; do
 done
 
 shift $(($OPTIND - 1))
+
+pastish_api=${api:-$pastish_api}
+pastish_server=${pastish_server:-}
+case "$pastish_api" in
+int) pastish_server=$pastish_server_int ;;
+ext) pastish_server=$pastish_server_ext ;;
+*) usage 6 ;;
+esac
+
+test .unset = ".${pastish_server:-unset}" && usage 6
 
 if test $# -gt 1; then
   usage 3

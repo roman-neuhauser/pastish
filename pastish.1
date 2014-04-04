@@ -16,6 +16,7 @@
 .Nm
 .Fl h
 .Nm
+.Op Fl A Ar API
 .Op Fl d Ar DESCRIPTION
 .Op Fl s Ar SYNTAX
 .Op Fl u Ar USERNAME
@@ -45,6 +46,11 @@ and display the resulting URL.
 .Bl -tag -width "xx"
 .It Fl h
 Display a usage description.
+.
+.It Fl A Ar API
+Server uses
+.Ar API
+.Pq either Qo int Qc or Qo ext Qc .
 .
 .It Fl d Ar DESCRIPTION
 Submit the snippet with
@@ -99,13 +105,36 @@ scripts;
 they may define any of the following variables:
 .
 .Bl -tag -width "xx"
-.It pastish_server
+.It pastish_api
 Either
-.Li http://pastebin.suse.de/
+.Qq Li int
 or
-.Li http://susepaste.org/ .
+.Qq Li ext .
 Defaults to
-.Li http://pastebin.suse.de/ .
+.Qq Li int .
+.
+.It pastish_server
+Defaults to
+.Va $pastish_server_int
+when
+.Va $pastish_api
+is
+.Qq Li int ,
+and
+.Va $pastish_server_ext
+when
+.Va $pastish_api
+is
+.Qq Li ext .
+.
+.It pastish_server_int
+Defaults to
+.Qq Li http://pastebin.suse.de/ .
+.
+.It pastish_server_ext
+Defaults to
+.Qq Li http://susepaste.org/ .
+.
 .It pastish_user
 Any string identifying the submitter.
 Defaults to
@@ -140,6 +169,8 @@ otherwise.
 .Sh SEE ALSO
 SUSE pastebin server
 .Aq https://pastebin.suse.de/ .
+openSUSE Paste
+.Aq http://susepaste.org/ .
 .\" SEE ALSO }}}
 .\" .Sh STANDARDS
 .\" .Sh HISTORY

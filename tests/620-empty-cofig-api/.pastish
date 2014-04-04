@@ -1,0 +1,6 @@
+exec 3>tape.actual
+
+. "$PWD/../fakes"
+
+pastish_api=
+pastish_server=http://fub.ar/

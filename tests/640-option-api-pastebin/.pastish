@@ -1,0 +1,3 @@
+exec 3>tape.actual
+
+. "$PWD/../fakes"

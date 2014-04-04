@@ -1,0 +1,3 @@
+pastish: garbled configuration
+pastish:   pastish_api      = wtf
+pastish:   pastish_server   = http://fub.ar/
