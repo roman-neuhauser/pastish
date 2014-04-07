@@ -69,7 +69,16 @@ usage() # {{{
 
 is_number() # {{{
 {
-  test ${#1} -eq "$(expr "$1" : '[[:digit:]][[:digit:]]*')"
+  local pattern
+  case "$pastish_api" in
+  int)
+    pattern='[[:digit:]][[:digit:]]*'
+  ;;
+  ext)
+    pattern='[[:xdigit:]][[:xdigit:]]*'
+  ;;
+  esac
+  test ${#1} -eq "$(expr "$1" : "$pattern")"
 } # }}}
 
 do_submit() # {{{
