@@ -1,0 +1,5 @@
+exec 3>tape.actual
+
+. "$PWD/../fakes"
+
+pastish_user=snafubar
