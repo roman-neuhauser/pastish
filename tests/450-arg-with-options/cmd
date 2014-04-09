@@ -1,1 +1,1 @@
-${1?} -s python 42
+exec ../cmd "${1:?}" -s python 42

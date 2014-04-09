@@ -1,1 +1,1 @@
-env HOME="$PWD" ${1?} 42
+exec ../cmd "${1:?}" 42

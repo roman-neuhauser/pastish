@@ -1,1 +1,1 @@
-env HOME="$PWD" ${1:?} -A ext 42
+exec ../cmd "${1:?}" -A ext 42

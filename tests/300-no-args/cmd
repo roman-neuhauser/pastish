@@ -1,1 +1,1 @@
-env HOME="$PWD" ${1?} </dev/null
+exec ../cmd "${1:?}" </dev/null
