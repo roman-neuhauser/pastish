@@ -1,0 +1,1 @@
+pastish should transform -o optargs into -F optargs for curl(1)

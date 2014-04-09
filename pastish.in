@@ -113,7 +113,8 @@ do_submit() # {{{
   curl \
     -fSs \
     -w '%{redirect_url}\n' \
-    "$@"
+    "$@" \
+    $form_fields
 } # }}}
 
 do_fetch() # {{{
@@ -128,11 +129,14 @@ do_fetch() # {{{
   esac
 } # }}}
 
-while getopts :A:d:hs:u: optname; do
+form_fields=
+
+while getopts :A:d:ho:s:u: optname; do
   case $optname in
   A) api="$OPTARG" ;;
   d) desc="$OPTARG" ;;
   h) usage 0 ;;
+  o) form_fields="$form_fields -F $OPTARG" ;;
   s) hili="$OPTARG" ;;
   u) user="$OPTARG" ;;
   :) usage 1 "$OPTARG" ;; # option-argument missing

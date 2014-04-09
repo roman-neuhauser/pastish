@@ -18,6 +18,7 @@
 .Nm
 .Op Fl A Ar API
 .Op Fl d Ar DESCRIPTION
+.Op Fl o Ar NAME=VALUE
 .Op Fl s Ar SYNTAX
 .Op Fl u Ar USERNAME
 .Nm
@@ -35,7 +36,7 @@ will fetch the corresponding snippet, and display it
 on standard output.
 .Pp
 Given no arguments, and possibly any of the
-.Fl d , s , u
+.Fl d , o , s , u
 options,
 .Nm
 will upload the contents of standard input,
@@ -55,6 +56,12 @@ Server uses
 .It Fl d Ar DESCRIPTION
 Submit the snippet with
 .Ar DESCRIPTION .
+.
+.It Fl o Ar NAME=VALUE
+Submit the snippet with form field
+.Va NAME
+set to
+.Va VALUE .
 .
 .It Fl s Ar SYNTAX
 Use

@@ -17,7 +17,8 @@
 
   `SYNOPSIS`
        pastish -h
-       pastish [-A `API`] [-d `DESCRIPTION`] [-s `SYNTAX`] [-u `USERNAME`]
+       pastish [-A `API`] [-d `DESCRIPTION`] [-o `NAME=VALUE` ]
+               [-s `SYNTAX`] [-u `USERNAME`]
        pastish `ID`
 
   `DESCRIPTION`
@@ -26,7 +27,7 @@
        Given a single snippet id, `pastish` will fetch the corresponding
        snippet, and display it on standard output.
 
-       Given no arguments, and possibly any of the `-A`, `-d`, `-s`, `-u`
+       Given no arguments, and possibly any of the `-A`, `-d`, `-o`, `-s`, `-u`
        options, `pastish` will upload the contents of standard input, and
        display the resulting URL.
 
@@ -37,6 +38,9 @@
 
        -d   `DESCRIPTION`
             Submit the snippet with `DESCRIPTION`.
+
+       -o   `NAME=VALUE`
+            Submit the snippet with form field `NAME` set to `VALUE`.
 
        -s   `SYNTAX`
             Use `SYNTAX` for highlighting.
