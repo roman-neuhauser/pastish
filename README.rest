@@ -16,10 +16,10 @@
        `pastish` — Tiny client for the SUSE pastebin service.
 
   `SYNOPSIS`
-       pastish -h
-       pastish [-A `API`] [-d `DESCRIPTION`] [-o `NAME=VALUE` ]
-               [-s `SYNTAX`] [-u `USERNAME`]
-       pastish `ID`
+       `pastish` -h
+       `pastish` [-A *API*] [-d *DESCRIPTION*] [-o *NAME=VALUE* ]
+               [-s *SYNTAX*] [-u *USERNAME*]
+       `pastish` `ID`
 
   `DESCRIPTION`
        `pastish` is a simple client for pastebin.suse.de and susepaste.org.
@@ -31,26 +31,26 @@
        options, `pastish` will upload the contents of standard input, and
        display the resulting URL.
 
-       -h   Display a usage description.
+       `-h`   Display a usage description.
 
-       -A   `API`
-            Server uses `API` (either "int" or "ext").
+       `-A`   *API*
+            Server uses *API* (either "int" or "ext").
 
-       -d   `DESCRIPTION`
-            Submit the snippet with `DESCRIPTION`.
+       `-d`   *DESCRIPTION*
+            Submit the snippet with *DESCRIPTION*.
 
-       -o   `NAME=VALUE`
-            Submit the snippet with form field `NAME` set to `VALUE`.
+       `-o`   *NAME=VALUE*
+            Submit the snippet with form field *NAME* set to *VALUE*.
 
-       -s   `SYNTAX`
-            Use `SYNTAX` for highlighting.
+       `-s`   *SYNTAX*
+            Use *SYNTAX* for highlighting.
 
-       -u   `USERNAME`
-            The author of the snippet is `USERNAME`.
+       `-u`   *USERNAME*
+            The author of the snippet is *USERNAME*.
 
-       `ID` Fetch snippet with `ID`.
+       *ID* Fetch snippet with *ID*.
 
-       `http://susepaste.org/` snippets are private and expire in 24 hours.
+       `susepaste.org` snippets are private and expire in 24 hours.
 
   `ENVIRONMENT`
        `pastish` itself does not use any environment variables.  It is, however,
@@ -64,17 +64,17 @@
        any of the following variables:
 
        pastish_api
-           Either `int` or `ext`.  Defaults to `int`.
+           Either "int" or "ext".  Defaults to "int".
 
        pastish_server
-           Defaults to `$pastish_server_int` when `$pastish_api` is `int`, and
-           `$pastish_server_ext` when `$pastish_api` is `ext`.
+           Defaults to `$pastish_server_int` when `$pastish_api` is "int", and
+           `$pastish_server_ext` when `$pastish_api` is "ext".
 
        pastish_server_int
-           Defaults to `http://pastebin.suse.de/`.
+           Defaults to "http://pastebin.suse.de/".
 
        pastish_server_ext
-           Defaults to `http://susepaste.org/`.
+           Defaults to "http://susepaste.org/".
 
        pastish_user
            Any string identifying the submitter.
