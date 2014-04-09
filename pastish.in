@@ -72,13 +72,13 @@ is_number() # {{{
   local pattern
   case "$pastish_api" in
   int)
-    pattern='[[:digit:]][[:digit:]]*'
+    pattern='^[[:digit:]]+$'
   ;;
   ext)
-    pattern='[[:xdigit:]][[:xdigit:]]*'
+    pattern='^[[:xdigit:]]+$'
   ;;
   esac
-  test ${#1} -eq "$(expr "$1" : "$pattern")"
+  echo "$1" | grep -Eqe "$pattern"
 } # }}}
 
 do_submit() # {{{
