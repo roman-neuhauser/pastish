@@ -13,7 +13,7 @@
 .. parsed-literal::
 
   `NAME`
-       `pastish` — Tiny client for the SUSE pastebin service.
+       `pastish` — Tiny client for SUSE-related pastebin services
 
   `SYNOPSIS`
        `pastish` -h
