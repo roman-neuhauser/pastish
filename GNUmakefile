@@ -11,7 +11,9 @@ INSTALL_DIR?=	install -d 755
 INSTALL_SCRIPT?=	install -m 755
 RST2HTML?=$(call first_in_path,rst2html.py rst2html)
 
-installed =	pastish.1.gz pastish
+name =		pastish
+
+installed =	$(name).1.gz $(name)
 artifacts =	$(installed) README.html
 
 wc:
@@ -25,10 +27,10 @@ most: $(installed)
 clean:
 	$(RM) $(artifacts)
 
-check: pastish
-	SHELL=$(SHELL) $(SHELL) rnt/run-tests.sh tests $$PWD/pastish
+check: $(name)
+	SHELL=$(SHELL) $(SHELL) rnt/run-tests.sh tests $$PWD/$(name)
 
-pastish: pastish.in
+$(name): $(name).in
 	$(INSTALL_SCRIPT) $< $@
 
 html: README.html
@@ -42,8 +44,8 @@ html: README.html
 install: $(installed)
 	@$(INSTALL_DIR) $(DESTDIR)$(BINDIR)
 	@$(INSTALL_DIR) $(DESTDIR)$(MAN1DIR)
-	@$(INSTALL_SCRIPT) pastish $(DESTDIR)$(BINDIR)/pastish
-	@$(INSTALL_DATA) pastish.1.gz $(DESTDIR)$(MAN1DIR)/pastish.1.gz
+	@$(INSTALL_SCRIPT) $(name) $(DESTDIR)$(BINDIR)/$(name)
+	@$(INSTALL_DATA) $(name).1.gz $(DESTDIR)$(MAN1DIR)/$(name).1.gz
 
 define first_in_path
   $(or \
