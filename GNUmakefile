@@ -1,20 +1,20 @@
 # vim: ft=make ts=8 sts=2 sw=2 noet
 
-PREFIX ?=	/usr/local
-BINDIR ?=	$(PREFIX)/bin
-MANDIR ?=	$(PREFIX)/share/man
-MAN1DIR ?=	$(MANDIR)/man1
+PREFIX ?=         /usr/local
+BINDIR ?=         $(PREFIX)/bin
+MANDIR ?=         $(PREFIX)/share/man
+MAN1DIR ?=        $(MANDIR)/man1
 
-GZIPCMD?=	gzip
-INSTALL_DATA?=	install -m 644
-INSTALL_DIR?=	install -d 755
-INSTALL_SCRIPT?=	install -m 755
-RST2HTML?=$(call first_in_path,rst2html.py rst2html)
+GZIPCMD ?=        gzip
+INSTALL_DATA ?=   install -m 644
+INSTALL_DIR ?=    install -d 755
+INSTALL_SCRIPT ?= install -m 755
+RST2HTML ?=       $(call first_in_path,rst2html.py rst2html)
 
-name =		pastish
+name =            pastish
 
-installed =	$(name).1.gz $(name)
-artifacts =	$(installed) README.html
+installed =       $(name).1.gz $(name)
+artifacts =       $(installed) README.html
 
 wc:
 	git submodule init
