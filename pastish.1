@@ -18,10 +18,16 @@
 .Nm
 .Op Fl A Ar API
 .Op Fl d Ar DESCRIPTION
-.Op Fl o Ar NAME=VALUE
+.Oo
+. Fl o Ar NAME=VALUE
+.Oc Ns \&...
 .Op Fl s Ar SYNTAX
 .Op Fl u Ar USERNAME
 .Nm
+.Op Fl A Ar API
+.Oo
+. Fl o Ar NAME=VALUE
+.Oc Ns \&...
 .Ar ID
 .\" SYNOPSIS }}}
 .
@@ -34,12 +40,16 @@ and
 .Lk http://susepaste.org.
 .Pp
 Given a single snippet id,
+and possibly the
+.Fl A ,
+.Fl o
+options,
 .Nm
 will fetch the corresponding snippet, and display it
 on standard output.
 .Pp
 Given no arguments, and possibly any of the
-.Fl d , o , s , u
+.Fl A, d , o , s , u
 options,
 .Nm
 will upload the contents of standard input,
@@ -59,7 +69,7 @@ Submit the snippet with
 .Ar DESCRIPTION .
 .
 .It Fl o Ar NAME=VALUE
-Submit the snippet with form field
+Submit or fetch the snippet with form field
 .Va NAME
 set to
 .Va VALUE .

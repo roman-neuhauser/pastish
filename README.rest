@@ -17,15 +17,16 @@
 
   `SYNOPSIS`
        `pastish` -h
-       `pastish` [-A *API*] [-d *DESCRIPTION*] [-o *NAME=VALUE* ]
+       `pastish` [-A *API*] [-d *DESCRIPTION*] [-o *NAME=VALUE* ]...
                [-s *SYNTAX*] [-u *USERNAME*]
-       `pastish` `ID`
+       `pastish` [-A *API*] [-o *NAME=VALUE* ]... `ID`
 
   `DESCRIPTION`
        `pastish` is a simple client for pastebin.suse.de and susepaste.org.
 
-       Given a single snippet id, `pastish` will fetch the corresponding
-       snippet, and display it on standard output.
+       Given a single snippet id, and possibly the `-A`, `-o` options,
+       `pastish` will fetch the corresponding snippet, and display it
+       on standard output.
 
        Given no arguments, and possibly any of the `-A`, `-d`, `-o`, `-s`, `-u`
        options, `pastish` will upload the contents of standard input, and
@@ -40,7 +41,7 @@
             Submit the snippet with *DESCRIPTION*.
 
        `-o`   *NAME=VALUE*
-            Submit the snippet with form field *NAME* set to *VALUE*.
+            Submit or fetch the snippet with form field *NAME* set to *VALUE*.
 
        `-s`   *SYNTAX*
             Use *SYNTAX* for highlighting.
