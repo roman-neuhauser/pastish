@@ -9,7 +9,7 @@ set -o nounset
 pastish_api=int
 pastish_server_int=http://pastebin.suse.de/
 pastish_server_ext=http://susepaste.org/
-pastish_user="$USER@$(hostname -f)"
+pastish_user="${USER:-anonymous}@${HOSTNAME:-unknown}"
 
 for f in /etc/pastish ~/.pastish; do
   test -f "$f" && test -r "$f" && {

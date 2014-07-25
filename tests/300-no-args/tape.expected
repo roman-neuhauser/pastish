@@ -1,2 +1,2 @@
 mktemp
-curl -fSs -w %{redirect_url}\n --url http://pastebin.suse.de/add -F code=</tmp/fake-path -F formsubmit=paste -F login=snafubar
+curl -fSs -w %{redirect_url}\n --url http://pastebin.suse.de/add -F code=</tmp/fake-path -F formsubmit=paste -F login=bombik@stupor.example.org

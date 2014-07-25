@@ -1,2 +1,5 @@
 cmd="${1:?}"; shift
-exec env HOME="$PWD" "$cmd" "$@"
+export HOME="$PWD"
+export USER=bombik
+export HOSTNAME=stupor.example.org
+exec "$cmd" "$@"
