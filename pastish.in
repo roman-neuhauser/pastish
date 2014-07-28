@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # vim: fdm=marker cms=\ #\ %s
 
@@ -9,7 +9,7 @@ set -o nounset
 pastish_api=int
 pastish_server_int=http://pastebin.suse.de/
 pastish_server_ext=http://susepaste.org/
-pastish_user="${USER:-anonymous}@${HOSTNAME:-unknown}"
+pastish_user="${USER:-anonymous}@${HOST:-unknown}"
 
 for f in /etc/pastish ~/.pastish; do
   test -f "$f" && test -r "$f" && {
@@ -39,7 +39,7 @@ usage() # {{{
       printf "%s: garbled configuration\n" "$self"
       local val
       for v in pastish_api pastish_server; do
-        val="${!v}"
+        val="${(P)v}"
         printf "%s:   %-16s = %s\n" "$self" "$v" "${val:-<empty>}"
       done
       exit 1
@@ -87,34 +87,38 @@ do_submit() # {{{
   tmpfile=$(mktemp)
   tee "$tmpfile" >/dev/null
 
+  local -a args
+
   : ${user="$pastish_user"}
   case "$pastish_api" in
   int)
-    set -- \
-      --url "${pastish_server}add" \
-      -F "code=<$tmpfile" \
-      -F formsubmit=paste \
-      ${hili:+-F highlight="$hili"} \
-      ${user:+-F login="$user"} \
-      ${desc:+-F desc="$desc"}
+    args=(
+      --url "${pastish_server}add"
+      -F "code=<$tmpfile"
+      -F formsubmit=paste
+    )
+    (( ${+hili} )) && args+=(-F highlight=$hili)
+    (( ${+user} )) && args+=(-F login=$user)
+    (( ${+desc} )) && args+=(-F desc=$desc)
   ;;
   ext)
-    set -- \
-      --url "${pastish_server}" \
-      -F "code=<$tmpfile" \
-      -F submit=submit \
-      -F private=1 \
-      -F expire=$((24 * 60)) \
-      -F lang="${hili:-text}" \
-      ${user:+-F name="$user"} \
-      ${desc:+-F title="$desc"}
+    args=(
+      --url "${pastish_server}"
+      -F "code=<$tmpfile"
+      -F submit=submit
+      -F private=1
+      -F expire=$((24 * 60))
+      -F lang=${hili:-text}
+    )
+    (( ${+user} )) && args+=(-F name=$user)
+    (( ${+desc} )) && args+=(-F title=$desc)
   ;;
   esac
   curl \
     -fSs \
     -w '%{redirect_url}\n' \
-    "$@" \
-    $form_fields
+    "${(@)args}" \
+    "${(@)form_fields}"
 } # }}}
 
 do_fetch() # {{{
@@ -129,14 +133,14 @@ do_fetch() # {{{
   esac
 } # }}}
 
-form_fields=
+declare -a form_fields
 
 while getopts :A:d:ho:s:u: optname; do
   case $optname in
   A) api="$OPTARG" ;;
   d) desc="$OPTARG" ;;
   h) usage 0 ;;
-  o) form_fields="$form_fields -F $OPTARG" ;;
+  o) form_fields+=(-F $OPTARG) ;;
   s) hili="$OPTARG" ;;
   u) user="$OPTARG" ;;
   :) usage 1 "$OPTARG" ;; # option-argument missing

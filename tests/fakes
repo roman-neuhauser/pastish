@@ -1,5 +1,5 @@
 fake()
-{
+{ {
   [ "${BSU_QUIET_FAKE:-'0'}" = '1' ] && return
   [ $# -eq 0 ] && return
   local i=0
@@ -12,7 +12,7 @@ fake()
     esac
   done
   printf '\n'
-} >&3
+} >&3 }
 
 curl()    { fake curl    ${1+"$@"}; echo "output from curl(1)"; }
 mktemp()  { fake mktemp  ${1+"$@"}; echo '/tmp/fake-path'; }
