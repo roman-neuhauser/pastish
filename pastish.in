@@ -154,15 +154,15 @@ ext) pastish_server=$pastish_server_ext ;;
 *) usage 6 ;;
 esac
 
-test .unset = ".${pastish_server:-unset}" && usage 6
+[[ -z ${pastish_server:+nonempty} ]] && usage 6
 
 if test $# -gt 1; then
   usage 3
 elif test $# -eq 1; then
   is_number "$1" || usage 4
-  test .unset = ".${desc-unset}" || usage 5 d
-  test .unset = ".${hili-unset}" || usage 5 s
-  test .unset = ".${user-unset}" || usage 5 u
+  [[ -z ${desc+set} ]] || usage 5 d
+  [[ -z ${hili+set} ]] || usage 5 s
+  [[ -z ${user+set} ]] || usage 5 u
   req=fetch
 elif test $# -eq 0; then
   req=submit
