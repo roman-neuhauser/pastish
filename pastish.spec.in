@@ -12,6 +12,7 @@ BuildRequires:  filesystem
 BuildArch:      noarch
 BuildRoot:      %_tmppath/%name-%version-build
 Requires:       curl
+Requires:       zsh
 
 %define pastish_make  make PREFIX=%{_prefix}
 %description

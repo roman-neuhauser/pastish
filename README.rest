@@ -56,12 +56,12 @@
   `ENVIRONMENT`
        `pastish` itself does not use any environment variables.  It is, however,
        implemented in terms of third-party commands which do use them.  This
-       means `pastish` may be influenced by environment variables used by sh(1),
+       means `pastish` may be influenced by environment variables used by zsh(1),
        curl(1), possibly others.
 
   `FILES`
        `pastish` reads, in order, */etc/pastish* and *~/.pastish*.  These files,
-       if present, are expected to be sh(1)-compatible scripts; they may define
+       if present, are expected to be zsh(1)-compatible scripts; they may define
        any of the following variables:
 
        pastish_api
