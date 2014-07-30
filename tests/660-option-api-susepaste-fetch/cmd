@@ -1,1 +1,1 @@
-exec ../cmd "${1:?}" -A ext 42
+exec ../cmd "${1:?}" -A ext -o foo=bar -o baz=qux 42

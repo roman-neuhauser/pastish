@@ -1,1 +1,1 @@
-curl -G http://susepaste.org/view/raw/42
+curl -G -F foo=bar -F baz=qux http://susepaste.org/view/raw/42

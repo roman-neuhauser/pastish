@@ -121,10 +121,10 @@ do_fetch() # {{{
 {
   case "$pastish_api" in
   int)
-    curl -G "$pastish_server$1/src"
+    curl -G $form_fields "$pastish_server$1/src"
   ;;
   ext)
-    curl -G "${pastish_server}view/raw/$1"
+    curl -G $form_fields "${pastish_server}view/raw/$1"
   ;;
   esac
 } # }}}

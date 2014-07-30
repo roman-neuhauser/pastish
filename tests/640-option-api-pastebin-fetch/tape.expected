@@ -1,1 +1,1 @@
-curl -G http://pastebin.suse.de/42/src
+curl -G -F omg=wtf -F lol=wut http://pastebin.suse.de/42/src

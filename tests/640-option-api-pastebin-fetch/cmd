@@ -1,1 +1,1 @@
-exec ../cmd "${1:?}" -A int 42
+exec ../cmd "${1:?}" -A int -o omg=wtf -o lol=wut 42
