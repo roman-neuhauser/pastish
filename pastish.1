@@ -156,7 +156,15 @@ Defaults to
 .It pastish_user
 Any string identifying the submitter.
 Defaults to
-.Dq Va $USER Ns Li @ Ns Cm $(hostname -f) .
+.Qq Va $USER Ns Li @ Ns Va $HOSTNAME ,
+with
+.Va $USER
+defaulting to
+.Qq Li anonymous
+and
+.Va $HOSTNAME
+defaulting to
+.Qq Li unknown .
 .El
 .\" FILES }}}
 .\" EXAMPLES {{{
