@@ -1,0 +1,1 @@
+exec ../cmd "${1:?}" -A int -d fubar -u bob -s shell -o ran=dom -o snaf=ubar </dev/null

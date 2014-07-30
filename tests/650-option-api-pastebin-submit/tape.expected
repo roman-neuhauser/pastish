@@ -1,0 +1,2 @@
+mktemp
+curl -fSs -w %{redirect_url}\n --url http://pastebin.suse.de/add -F code=</tmp/fake-path -F formsubmit=paste -F highlight=shell -F login=bob -F desc=fubar -F ran=dom -F snaf=ubar

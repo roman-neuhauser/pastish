@@ -1,0 +1,2 @@
+mktemp
+curl -fSs -w %{redirect_url}\n --url http://susepaste.org/ -F code=</tmp/fake-path -F submit=submit -F private=1 -F expire=1440 -F lang=prolog -F name=alice -F ste=ady -F prog=ress

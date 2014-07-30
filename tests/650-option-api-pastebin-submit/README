@@ -1,0 +1,1 @@
+`pastish -A int` should use $pastish_server_int
