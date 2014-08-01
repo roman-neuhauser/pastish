@@ -7,7 +7,7 @@ MAN1DIR ?=        $(MANDIR)/man1
 
 GZIPCMD ?=        gzip
 INSTALL_DATA ?=   install -m 644
-INSTALL_DIR ?=    install -d 755
+INSTALL_DIR ?=    install -m 755 -d
 INSTALL_SCRIPT ?= install -m 755
 RST2HTML ?=       $(call first_in_path,rst2html.py rst2html)
 
