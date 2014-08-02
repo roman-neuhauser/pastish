@@ -95,11 +95,11 @@
        `pastish` exits with 0 on success, and with >0 otherwise.
 
   `SEE ALSO`
-       SUSE pastebin server ⟨https://pastebin.suse.de/⟩.
-       openSUSE Paste ⟨http://susepaste.org/⟩.
+       SUSE pastebin server ⟨https://pastebin.suse.de⟩.
+       openSUSE Paste ⟨http://susepaste.org⟩.
 
   `AUTHORS`
-       `pastish` and this manual page are written by ⟨rneuhauser@suse.cz⟩.
+       Roman Neuhauser ⟨rneuhauser@suse.cz⟩.
 
        See ⟨https://github.com/roman-neuhauser/pastish/⟩.
 
