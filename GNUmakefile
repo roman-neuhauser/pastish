@@ -42,10 +42,10 @@ html: README.html
 	$(GZIPCMD) < $< > $@
 
 install: $(installed)
-	@$(INSTALL_DIR) $(DESTDIR)$(BINDIR)
-	@$(INSTALL_DIR) $(DESTDIR)$(MAN1DIR)
-	@$(INSTALL_SCRIPT) $(name) $(DESTDIR)$(BINDIR)/$(name)
-	@$(INSTALL_DATA) $(name).1.gz $(DESTDIR)$(MAN1DIR)/$(name).1.gz
+	$(INSTALL_DIR) $(DESTDIR)$(BINDIR)
+	$(INSTALL_DIR) $(DESTDIR)$(MAN1DIR)
+	$(INSTALL_SCRIPT) $(name) $(DESTDIR)$(BINDIR)/$(name)
+	$(INSTALL_DATA) $(name).1.gz $(DESTDIR)$(MAN1DIR)/$(name).1.gz
 
 define first_in_path
   $(or \
