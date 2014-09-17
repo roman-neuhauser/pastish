@@ -1,6 +1,7 @@
 .sw?
 .*.sw?
 .bs-update
+.built
 README.html
 pastish
 pastish.1.gz

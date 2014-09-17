@@ -24,8 +24,11 @@ all: $(artifacts)
 
 most: $(installed)
 
+all most:
+	@touch .built
+
 clean:
-	$(RM) $(artifacts)
+	$(RM) .buit $(artifacts)
 
 check: $(name)
 	SHELL=$(SHELL) $(SHELL) rnt/run-tests.sh tests $$PWD/$(name)
@@ -41,11 +44,15 @@ html: README.html
 %.1.gz: %.1
 	$(GZIPCMD) < $< > $@
 
-install: $(installed)
+install: .built
 	$(INSTALL_DIR) $(DESTDIR)$(BINDIR)
 	$(INSTALL_DIR) $(DESTDIR)$(MAN1DIR)
 	$(INSTALL_SCRIPT) $(name) $(DESTDIR)$(BINDIR)/$(name)
 	$(INSTALL_DATA) $(name).1.gz $(DESTDIR)$(MAN1DIR)/$(name).1.gz
+
+.built:
+	@printf "%s\n" '' "ERROR: run '$(MAKE) all' first." '' >&2
+	@false
 
 define first_in_path
   $(or \
