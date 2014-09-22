@@ -1,0 +1,25 @@
+# Maintainer: Roman Neuhauser <neuhauser@sigpipe.cz>
+pkgname=pastish
+pkgver=__VERSION__
+pkgrel=1
+pkgdesc="Tiny client for SUSE pastebin services"
+arch=(any)
+url="https://github.com/roman-neuhauser/$pkgname"
+license=(MIT)
+depends=(curl)
+source=($pkgname-$pkgver.tar.gz)
+sha1sums=(SKIP)
+
+build() {
+	_make
+}
+
+package() {
+	_make install DESTDIR="$pkgdir"
+}
+
+_make() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make PREFIX=/usr MANDIR=/usr/share/man "$@"
+}
+
